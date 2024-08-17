@@ -72,15 +72,6 @@ xterm*|rxvt*)
     ;;
 esac
 
-# We do this before the following so that all the paths work.
-for file in ~/.{bash_prompt,aliases,functions,path,exports}; do
-	if [[ -r "$file" ]] && [[ -f "$file" ]]; then
-		# shellcheck source=/dev/null
-		source "$file"
-	fi
-done
-unset file
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
@@ -100,7 +91,13 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
+export PATH=${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH
 
 . "$HOME/.cargo/env"
-. "$HOME/.asdf/asdf.sh"
-. "$HOME/.asdf/completions/asdf.bash"
+for file in ~/.{bash_prompt,aliases,functions,path,exports}; do
+  if [[ -r "$file" ]] && [[ -f "$file" ]]; then
+    # shellcheck source=/dev/null
+    source "$file"
+  fi
+done
+unset file

@@ -19,6 +19,7 @@ alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo
 
 # Shortcuts
 alias g="git"
+alias c="chezmoi"
 
 # Easier navigation: .., ..., ...., .....
 alias ..="cd .."
@@ -31,3 +32,6 @@ alias week='date +%V'
 
 # copy working directory
 alias cwd='pwd | tr -d "\r\n" | xclip -selection clipboard'
+
+# Change to chezmoi path in current shell
+alias ccd="cd $(chezmoi source-path)"

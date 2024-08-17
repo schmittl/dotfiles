@@ -1,18 +1,31 @@
 [alias]
-	alias=!git config -l | grep ^alias | cut -c 7- | sort
-	co = checkout
-	contributors = shortlog --summary --numbered
-	l = log --pretty=oneline -n 20 --graph --abbrev-commit
-	s = status -s
+    a = add
+    aa = add .
+    alias=!git config -l | grep ^alias | cut -c 7- | sort
+    c = commit
+    cm = commit -m
+    ca = commit --amend --no-edit
+    co = checkout
+    cob = checkout -b
+    contributors = shortlog --summary --numbered
+    d = diff
+    ds = diff --staged
+    l = log --pretty=oneline -n 20 --graph --abbrev-commit
+    p = push
+    pf = push --force-with-lease
+    s = status -s
+    st = status
 [core]
-	autocrlf = false
-	eol = lf
+    autocrlf = false
+    eol = lf
 [user]
-	email = {{ .email }}
-	name = Lukas Schmitt
+    email = {{ .email }}
+    name = Lukas Schmitt
 [fetch]
- 	prune = true
+    prune = true
 [pull]
-	rebase = false
+    rebase = true
 [push]
-	autoSetupRemote = true
+    autoSetupRemote = true
+[rebase]
+    autoStash = true
