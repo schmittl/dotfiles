@@ -85,7 +85,7 @@ fi
 
 sshkeys=$(find $HOME/.ssh -type f -name 'id*' ! -name '*.pub' -printf "%f\n")
 
-if [[ $sshkeys ]]; then
+if [[ $sshkeys ]] && [[ -x /usr/bin/keychain ]]; then
   # For Loading the SSH key
   /usr/bin/keychain --nogui ${sshkeys}
   source $HOME/.keychain/$HOSTNAME-sh
@@ -95,7 +95,7 @@ export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
 export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
-export PATH=${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH
+export PATH="$(aqua root-dir)/bin:$PATH"
 
 [[ -s "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 
