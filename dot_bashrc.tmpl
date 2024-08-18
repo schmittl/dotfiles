@@ -87,7 +87,7 @@ sshkeys=$(find $HOME/.ssh -type f -name 'id*' ! -name '*.pub' -printf "%f\n")
 
 if [[ $sshkeys ]] && [[ -x /usr/bin/keychain ]]; then
   # For Loading the SSH key
-  /usr/bin/keychain --nogui ${sshkeys}
+  /usr/bin/keychain --quiet --nogui ${sshkeys}
   source $HOME/.keychain/$HOSTNAME-sh
 fi
 
@@ -102,6 +102,7 @@ export PATH="${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua
 {{- else if eq .chezmoi.os "windows" }}
 export PATH="$(aqua root-dir)/bin:$PATH"
 {{- end }}
+export AQUA_GLOBAL_CONFIG=${AQUA_GLOBAL_CONFIG:-}:${XDG_CONFIG_HOME:-$HOME/.config}/aquaproj-aqua/aqua.yaml
 
 [[ -s "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 
@@ -112,3 +113,5 @@ for file in ~/.{bash_prompt,aliases,functions,path,exports}; do
   fi
 done
 unset file
+
+command -v starship &> /dev/null && eval "$(starship init bash)"
