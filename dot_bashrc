@@ -83,9 +83,13 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# For Loading the SSH key
-/usr/bin/keychain --nogui id_rsa id_ed25519
-source $HOME/.keychain/$HOSTNAME-sh
+sshkeys=$(find $HOME/.ssh -type f -name 'id*' ! -name '*.pub' -printf "%f\n")
+
+if [[ $sshkeys ]]; then
+  # For Loading the SSH key
+  /usr/bin/keychain --nogui ${sshkeys}
+  source $HOME/.keychain/$HOSTNAME-sh
+fi
 
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
@@ -93,7 +97,8 @@ export VOLTA_HOME="$HOME/.volta"
 export PATH="$VOLTA_HOME/bin:$PATH"
 export PATH=${AQUA_ROOT_DIR:-${XDG_DATA_HOME:-$HOME/.local/share}/aquaproj-aqua}/bin:$PATH
 
-. "$HOME/.cargo/env"
+[[ -s "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
+
 for file in ~/.{bash_prompt,aliases,functions,path,exports}; do
   if [[ -r "$file" ]] && [[ -f "$file" ]]; then
     # shellcheck source=/dev/null

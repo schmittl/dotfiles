@@ -3,7 +3,10 @@
 {{ $packages := list
      "build-essential"
      "curl"
-     "git" -}}
+     "git"
+     "keychain"
+     "unzip"
+     "zip" -}}
 
 {{ $sudo := "sudo " -}}
 {{ if eq .chezmoi.username "root" -}}
