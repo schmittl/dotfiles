@@ -35,3 +35,7 @@ alias cwd='pwd | tr -d "\r\n" | xclip -selection clipboard'
 
 # Change to chezmoi path in current shell
 alias ccd="cd $(chezmoi source-path)"
+
+# Open selected files in vim
+alias fim="fzf --height=100% --multi --bind 'enter:become(vim {+})' --preview 'bat --color=always {}' --preview-window '~3'"
+alias ff="fzf"

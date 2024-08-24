@@ -67,6 +67,9 @@ export PATH="$(aqua root-dir)/bin:$PATH"
 {{- end }}
 export AQUA_GLOBAL_CONFIG="$HOME/.config/aquaproj-aqua/aqua.yaml"
 
+export FZF_DEFAULT_COMMAND='rg --files --hidden --glob "!.git"'
+export FZF_DEFAULT_OPTS='--height=40% --layout=reverse'
+
 [[ -s "$HOME/.cargo/env" ]] && source "$HOME/.cargo/env"
 
 for file in ~/.{bash_prompt,aliases,functions,path,exports}; do
@@ -78,3 +81,4 @@ done
 unset file
 
 command -v starship &> /dev/null && eval "$(starship init bash)"
+command -v fzf &> /dev/null && eval "$(fzf --bash)"
