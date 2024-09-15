@@ -16,7 +16,7 @@ packages:
 - name: koalaman/shellcheck@v0.10.0
 - name: golang/go@go1.23.0
 - name: twpayne/chezmoi@v2.52.1
-- name: volta-cli/volta@v2.0.0
 - name: jqlang/jq@jq-1.7.1
 - name: junegunn/fzf@v0.54.3
 - name: starship/starship@v1.20.1
+- name: Schniz/fnm@v1.37.1
